@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import JsonTree from './components/JsonTree/JsonTree'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+  state={
+    src:{
+      version: '2',
+      services:{}
+    }
+  }
+
+  onAdd = (e) =>{
+    console.log(e);
+    this.setState({src: e.updated_src})    
+  }
+
+  onEdit = (e) =>{
+    this.setState({src: e.updated_src})    
+  }
+
+  onDelete = (e) =>{
+    console.log(e)
+    this.setState({src: e.updated_src})    
+  }
+
+
+
+
+
+  render(){
+    return (
+      <div className="App">
+        <JsonTree src={this.state.src} theme='summerfruit:inverted' 
+                  onAdd={this.onAdd} onEdit={this.onEdit} 
+                  onDelete={this.onDelete} displayDataTypes  displayObjectSize/>
+      </div>
+    );
+  }
+  
 }
 
 export default App;
